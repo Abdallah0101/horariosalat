@@ -4,612 +4,724 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Centro Islâmico de Joinville - Horário das Orações</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;600;700&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
+    --bg-page:      #060e07;
+    --card-bg:      #071a0c;
     --emerald:      #0d6e35;
-    --emerald-deep: #084d24;
-    --emerald-mid:  #115c2b;
+    --emerald-glow: #14a34d;
+    --emerald-deep: #041008;
     --gold:         #c9953a;
-    --gold-light:   #e8b85a;
-    --gold-pale:    #f5e9cc;
-    --cream:        #faf6ee;
-    --red:          #b5291c;
-    --white:        #ffffff;
-    --ink:          #1a1a1a;
-    --ink-soft:     #3a3a3a;
+    --gold-bright:  #f0c060;
+    --gold-pale:    #f5e5b8;
+    --gold-dim:     #7a5a1e;
+    --text-primary: #f0e8cc;
+    --text-soft:    rgba(240,232,204,0.55);
+    --glass-border: rgba(201,149,58,0.22);
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
+    from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position:  200% center; }
+  @keyframes cardReveal {
+    from { opacity: 0; transform: scale(0.95) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
   }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.5; transform: scale(0.85); }
+  @keyframes goldShimmer {
+    0%   { background-position: -300% center; }
+    100% { background-position:  300% center; }
+  }
+  @keyframes starTwinkle {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 0.9; }
+  }
+  @keyframes crescentGlow {
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(201,149,58,0.25)); }
+    50%      { filter: drop-shadow(0 0 18px rgba(201,149,58,0.65)); }
+  }
+  @keyframes rowSlide {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
 
   body {
-    background: #ccc8bc;
+    background: var(--bg-page);
     background-image:
-      radial-gradient(ellipse at 30% 20%, rgba(13,110,53,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 75% 80%, rgba(201,149,58,0.12) 0%, transparent 50%);
+      radial-gradient(ellipse 80% 55% at 18% 10%, rgba(13,110,53,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 88% 82%, rgba(201,149,58,0.09) 0%, transparent 55%);
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
     font-family: 'Josefin Sans', sans-serif;
-    padding: 20px 14px;
+    padding: 24px 14px 44px;
+    overflow-x: hidden;
   }
 
-  /* ── OUTER FRAME ── */
-  .frame {
-    width: 100%;
-    max-width: 540px;
-    background: var(--emerald-deep);
-    border-radius: 20px;
-    padding: 3px;
-    box-shadow:
-      0 20px 60px rgba(0,0,0,0.38),
-      0 4px 12px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.08);
-    animation: fadeUp 0.6s ease both;
-  }
-
-  /* golden border ring */
-  .frame::before {
+  /* star field */
+  body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
-    border-radius: 20px;
-    background: linear-gradient(135deg, var(--gold), transparent 40%, transparent 60%, var(--gold-light));
+    background-image:
+      radial-gradient(1px 1px at 11% 7%,  rgba(255,255,255,0.75) 0%, transparent 100%),
+      radial-gradient(1px 1px at 37% 13%, rgba(255,255,255,0.50) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 64% 5%,  rgba(255,255,255,0.80) 0%, transparent 100%),
+      radial-gradient(1px 1px at 84% 19%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 21% 29%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 34%, rgba(255,255,255,0.60) 0%, transparent 100%),
+      radial-gradient(1px 1px at 6%  53%, rgba(255,255,255,0.40) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 71%, rgba(255,255,255,0.30) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 77% 63%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 32% 89%, rgba(255,255,255,0.40) 0%, transparent 100%),
+      radial-gradient(1px 1px at 96% 91%, rgba(255,255,255,0.60) 0%, transparent 100%);
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    animation: starTwinkle 4.5s ease-in-out infinite alternate;
+  }
+
+  /* ── OUTER WRAPPER ── */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    animation: cardReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* ghost crescent top-right */
+  .crescent-bg {
+    position: absolute;
+    top: -28px; right: -18px;
+    width: 120px; height: 120px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+    animation: crescentGlow 5s ease-in-out infinite;
+  }
+
+  /* ── ANIMATED GOLD BORDER ── */
+  .frame {
+    position: relative;
+    border-radius: 22px;
+    padding: 2px;
+    background: linear-gradient(
+      145deg,
+      var(--gold-bright) 0%,
+      var(--gold-dim)    25%,
+      var(--gold-bright) 50%,
+      var(--gold-dim)    75%,
+      var(--gold-bright) 100%
+    );
+    background-size: 300% 300%;
+    animation: goldShimmer 6s linear infinite;
+    box-shadow:
+      0 0 0 1px rgba(201,149,58,0.12),
+      0 28px 90px rgba(0,0,0,0.75),
+      0 8px 28px rgba(0,0,0,0.5),
+      0 0 70px rgba(13,110,53,0.1);
   }
 
   /* ── CARD ── */
   .card {
     position: relative;
-    background: var(--cream);
-    border-radius: 18px;
+    background: var(--card-bg);
+    border-radius: 21px;
     overflow: hidden;
     isolation: isolate;
   }
 
-  /* geometric pattern bg */
+  /* Islamic geometric tile */
   .card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230d6e35' stroke-width='0.35' opacity='0.18'%3E%3Cpolygon points='28,4 52,28 28,52 4,28'/%3E%3Cpolygon points='28,12 44,28 28,44 12,28'/%3E%3Cline x1='28' y1='4' x2='28' y2='52'/%3E%3Cline x1='4' y1='28' x2='52' y2='28'/%3E%3Cline x1='4' y1='4' x2='52' y2='52'/%3E%3Cline x1='52' y1='4' x2='4' y2='52'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 56px 56px;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230d6e35' stroke-width='0.4' opacity='0.28'%3E%3Crect x='10' y='10' width='60' height='60' transform='rotate(45 40 40)'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='28'/%3E%3Ccircle cx='40' cy='40' r='16'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='0' y1='0' x2='80' y2='80'/%3E%3Cline x1='80' y1='0' x2='0' y2='80'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.55;
   }
 
-  /* ── HEADER BAND ── */
+  /* large crescent watermark */
+  .card::after {
+    content: '☽';
+    position: absolute;
+    bottom: -30px; left: -15px;
+    font-size: 240px;
+    color: rgba(13,110,53,0.035);
+    pointer-events: none;
+    z-index: 0;
+    line-height: 1;
+    transform: rotate(-20deg);
+  }
+
+  /* ── HEADER ── */
   .header {
     position: relative;
-    z-index: 1;
-    background: linear-gradient(170deg, var(--emerald-deep) 0%, var(--emerald) 100%);
-    padding: clamp(16px, 4vw, 24px) clamp(16px, 4vw, 24px) 0;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(4,16,8,0.98) 0%, rgba(7,26,12,0.94) 100%);
+    padding: clamp(18px, 5vw, 28px) clamp(18px, 5vw, 28px) 0;
     overflow: hidden;
   }
 
-  /* top left arch ornament */
+  /* top gold line */
   .header::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    border: 28px solid rgba(201,149,58,0.12);
-    pointer-events: none;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%, var(--gold-dim) 15%, var(--gold-bright) 35%,
+      var(--gold) 50%, var(--gold-bright) 65%, var(--gold-dim) 85%, transparent 100%
+    );
+    box-shadow: 0 0 14px rgba(201,149,58,0.5);
   }
+
+  /* soft radial glow from top */
   .header::after {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 220px; height: 110px;
+    background: radial-gradient(ellipse at top, rgba(201,149,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .header-inner {
     display: flex;
     align-items: center;
-    gap: clamp(10px, 3vw, 18px);
-    padding-bottom: clamp(14px, 3.5vw, 20px);
+    gap: clamp(12px, 3.5vw, 20px);
+    padding-bottom: clamp(16px, 4vw, 22px);
   }
 
-  /* mosque dome icon */
-  .dome-wrap {
+  /* ── DOME MEDALLION ── */
+  .dome-medallion {
     flex-shrink: 0;
-    width: clamp(58px, 15vw, 76px);
-    height: clamp(58px, 15vw, 76px);
-    background: radial-gradient(circle at 38% 35%, rgba(255,255,255,0.1) 0%, transparent 65%);
-    border: 1.5px solid rgba(201,149,58,0.5);
+    position: relative;
+    width: clamp(68px, 17vw, 88px);
+    height: clamp(68px, 17vw, 88px);
+  }
+  .dome-ring-outer {
+    position: absolute; inset: 0;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 0 4px rgba(201,149,58,0.12), inset 0 0 16px rgba(0,0,0,0.2);
+    border: 1.5px solid rgba(201,149,58,0.42);
+    background: radial-gradient(circle at 38% 32%, rgba(13,110,53,0.22), rgba(4,16,8,0.92) 70%);
+    box-shadow: 0 0 18px rgba(201,149,58,0.15), inset 0 0 14px rgba(0,0,0,0.5);
   }
-
+  .dome-ring-inner {
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,149,58,0.18);
+  }
+  .dome-icon-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
   .dome-svg {
-    width: clamp(34px, 9vw, 46px);
-    height: clamp(34px, 9vw, 46px);
+    width: clamp(40px, 10vw, 52px);
+    height: clamp(40px, 10vw, 52px);
+    animation: crescentGlow 4s ease-in-out infinite;
   }
 
-  .header-text {
-    flex: 1;
-    min-width: 0;
-  }
+  /* ── HEADER TEXT ── */
+  .header-text { flex: 1; min-width: 0; }
 
   .arabic-title {
     font-family: 'Amiri', serif;
-    font-size: clamp(18px, 5.2vw, 26px);
-    color: var(--gold-light);
+    font-size: clamp(17px, 5vw, 25px);
+    color: var(--gold-pale);
     direction: rtl;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    text-shadow: 0 0 22px rgba(201,149,58,0.28);
   }
 
-  .divider-ornament {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 4px 0;
+  .ornament-row {
+    display: flex; align-items: center; gap: 5px;
+    margin: 5px 0;
   }
-  .divider-ornament .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,149,58,0.5));
+  .orn-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(201,149,58,0.0), rgba(201,149,58,0.55));
   }
-  .divider-ornament .line.rev {
-    background: linear-gradient(90deg, rgba(201,149,58,0.5), transparent);
+  .orn-line.r {
+    background: linear-gradient(90deg, rgba(201,149,58,0.55), rgba(201,149,58,0.0));
   }
-  .divider-ornament .diamond {
-    width: 5px; height: 5px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    border-radius: 1px;
-    flex-shrink: 0;
-  }
+  .orn-star { font-size: 8px; color: var(--gold); line-height: 1; }
 
   .portuguese-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(13px, 3.8vw, 18px);
-    color: var(--white);
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: clamp(14px, 4vw, 20px);
+    color: var(--text-primary);
+    font-weight: 500;
+    letter-spacing: 0.8px;
     line-height: 1.2;
   }
 
   .subtitle-tag {
-    display: inline-block;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(8px, 2.2vw, 10px);
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 2.5px;
+    font-size: clamp(8px, 2.1vw, 10px);
+    color: var(--text-soft);
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-top: 3px;
+    margin-top: 4px;
+    display: block;
   }
 
-  /* address strip */
-  .address-strip {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px clamp(16px, 4vw, 24px);
-    background: rgba(13,110,53,0.08);
-    border-top: 1px solid rgba(13,110,53,0.12);
+  /* ── GOLD RULE ── */
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent, rgba(201,149,58,0.12) 10%,
+      rgba(201,149,58,0.65) 40%, var(--gold-bright) 50%,
+      rgba(201,149,58,0.65) 60%, rgba(201,149,58,0.12) 90%, transparent
+    );
+    box-shadow: 0 0 9px rgba(201,149,58,0.22);
   }
-  .address-strip .pin {
-    font-size: 12px;
-    flex-shrink: 0;
+
+  /* ── ADDRESS STRIP ── */
+  .address-strip {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    gap: 7px;
+    padding: clamp(7px, 2vw, 10px) clamp(18px, 5vw, 28px);
+    background: rgba(201,149,58,0.04);
   }
   .address-strip span {
-    font-size: clamp(9px, 2.5vw, 11px);
-    color: var(--ink-soft);
-    letter-spacing: 0.4px;
+    font-size: clamp(9px, 2.4vw, 11px);
+    color: rgba(201,149,58,0.7);
+    letter-spacing: 0.8px;
     font-weight: 600;
+    text-transform: uppercase;
+  }
+  .addr-dot {
+    width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0.6; flex-shrink: 0;
   }
 
   /* ── BODY ── */
   .body {
-    position: relative;
-    z-index: 1;
-    padding: clamp(14px, 4vw, 22px) clamp(14px, 4vw, 22px);
+    position: relative; z-index: 2;
+    padding: clamp(16px, 4.5vw, 24px) clamp(16px, 4.5vw, 24px) clamp(18px, 5vw, 26px);
   }
 
-  /* month / badge row */
+  /* ── META ROW ── */
   .meta-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: clamp(12px, 3.5vw, 18px);
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: clamp(14px, 4vw, 20px);
+    animation: fadeUp 0.5s ease 0.08s both;
   }
 
-  .month-pill {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--emerald-deep);
-    color: var(--gold-light);
-    border-radius: 30px;
-    padding: 5px 14px 5px 10px;
-    font-size: clamp(10px, 2.8vw, 13px);
-    font-weight: 700;
-    letter-spacing: 1.2px;
+  .month-badge {
+    display: flex; align-items: center; gap: 9px;
+    background: linear-gradient(135deg, rgba(201,149,58,0.14), rgba(201,149,58,0.04));
+    border: 1px solid rgba(201,149,58,0.28);
+    border-radius: 9px;
+    padding: 7px 15px;
+    box-shadow: 0 2px 14px rgba(201,149,58,0.07);
+  }
+  .month-label {
+    font-size: clamp(8px, 2.2vw, 10px);
+    color: var(--text-soft);
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    border: 1px solid rgba(201,149,58,0.3);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: block; line-height: 1; margin-bottom: 3px;
   }
-  .month-pill .cal-icon { font-size: 14px; }
+  .month-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 18px);
+    color: var(--gold-pale);
+    font-weight: 700; letter-spacing: 0.5px; line-height: 1;
+  }
 
+  .arabic-month-wrap { text-align: right; }
   .arabic-month {
     font-family: 'Amiri', serif;
-    font-size: clamp(13px, 3.5vw, 17px);
-    color: var(--emerald);
-    direction: rtl;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    font-size: clamp(15px, 4.2vw, 19px);
+    color: var(--gold);
+    direction: rtl; font-weight: 700; display: block;
+    text-shadow: 0 0 14px rgba(201,149,58,0.22);
+  }
+  .arabic-year {
+    font-size: clamp(8px, 2vw, 9px);
+    color: var(--text-soft);
+    letter-spacing: 2px; text-transform: uppercase;
+    display: block; margin-top: 3px; text-align: right;
   }
 
   /* ── PRAYER TABLE ── */
   .table-section {
-    background: var(--emerald-deep);
-    border-radius: 14px;
+    background: rgba(0,0,0,0.38);
+    border-radius: 16px;
     overflow: hidden;
+    border: 1px solid rgba(201,149,58,0.18);
     box-shadow:
-      0 8px 28px rgba(8,77,36,0.35),
-      0 2px 6px rgba(0,0,0,0.15);
-    border: 1px solid rgba(201,149,58,0.2);
+      0 14px 48px rgba(0,0,0,0.55),
+      inset 0 1px 0 rgba(201,149,58,0.1),
+      0 0 0 1px rgba(13,110,53,0.08);
+    animation: fadeUp 0.55s ease 0.18s both;
+  }
+
+  /* emerald arch accent */
+  .table-arch {
+    height: 5px;
+    background: linear-gradient(90deg,
+      var(--emerald-deep),
+      var(--emerald) 25%,
+      var(--emerald-glow) 50%,
+      var(--emerald) 75%,
+      var(--emerald-deep)
+    );
+    box-shadow: 0 2px 8px rgba(13,110,53,0.5);
   }
 
   .table-head {
     display: grid;
-    grid-template-columns: 1.15fr 1fr 1fr;
-    padding: 9px 14px;
-    background: rgba(0,0,0,0.25);
-    border-bottom: 1px solid rgba(201,149,58,0.25);
+    grid-template-columns: 1.2fr 1fr 1fr;
+    padding: 10px 16px;
+    background: rgba(13,110,53,0.13);
+    border-bottom: 1px solid rgba(201,149,58,0.13);
     gap: 6px;
   }
-
   .table-head span {
-    font-size: clamp(9px, 2.4vw, 11px);
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    text-align: center;
+    font-size: clamp(8px, 2.2vw, 10px);
+    font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--text-soft); text-align: center;
   }
-  .table-head span:first-child { text-align: left; }
+  .table-head span:first-child { text-align: left; color: rgba(201,149,58,0.65); }
 
   .prayers-list {
-    padding: 10px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+    padding: 10px 12px 12px;
+    display: flex; flex-direction: column; gap: 7px;
   }
 
   .prayer-row {
     display: grid;
-    grid-template-columns: 1.15fr 1fr 1fr;
-    gap: 6px;
-    align-items: stretch;
-    animation: fadeUp 0.5s ease both;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 7px; align-items: stretch;
+    animation: rowSlide 0.4s ease both;
   }
-  .prayer-row:nth-child(1) { animation-delay: 0.05s; }
-  .prayer-row:nth-child(2) { animation-delay: 0.10s; }
-  .prayer-row:nth-child(3) { animation-delay: 0.15s; }
-  .prayer-row:nth-child(4) { animation-delay: 0.20s; }
-  .prayer-row:nth-child(5) { animation-delay: 0.25s; }
+  .prayer-row:nth-child(1) { animation-delay: 0.18s; }
+  .prayer-row:nth-child(2) { animation-delay: 0.25s; }
+  .prayer-row:nth-child(3) { animation-delay: 0.32s; }
+  .prayer-row:nth-child(4) { animation-delay: 0.39s; }
+  .prayer-row:nth-child(5) { animation-delay: 0.46s; }
 
   .prayer-name-cell {
-    background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,233,204,0.92));
-    border-radius: 8px;
-    padding: clamp(9px, 2.2vw, 12px) 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding-left: 12px;
-    border-left: 3px solid var(--gold);
-    gap: 1px;
+    background: linear-gradient(135deg, rgba(13,110,53,0.22), rgba(13,110,53,0.07));
+    border: 1px solid rgba(13,110,53,0.32);
+    border-left: 3px solid var(--emerald-glow);
+    border-radius: 10px;
+    padding: clamp(9px, 2.5vw, 13px) 10px clamp(9px, 2.5vw, 13px) 12px;
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .prayer-name-cell:hover {
+    background: linear-gradient(135deg, rgba(13,110,53,0.32), rgba(13,110,53,0.14));
+    border-left-color: var(--gold);
   }
 
   .prayer-en {
     font-size: clamp(13px, 3.8vw, 17px);
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: 0.2px;
-    line-height: 1;
+    font-weight: 700; color: var(--text-primary);
+    letter-spacing: 0.3px; line-height: 1;
   }
-
   .prayer-ar {
     font-family: 'Amiri', serif;
-    font-size: clamp(10px, 2.8vw, 13px);
-    color: var(--emerald);
-    direction: rtl;
-    line-height: 1.2;
+    font-size: clamp(11px, 3vw, 14px);
+    color: rgba(201,149,58,0.65);
+    direction: rtl; line-height: 1.3;
   }
 
   .time-cell {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: clamp(9px, 2.2vw, 12px) 4px;
+    background: rgba(201,149,58,0.05);
+    border: 1px solid rgba(201,149,58,0.14);
+    border-radius: 10px;
+    padding: clamp(9px, 2.5vw, 13px) 4px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1px;
-    transition: background 0.2s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .time-cell:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(201,149,58,0.11);
+    border-color: rgba(201,149,58,0.35);
+    box-shadow: 0 0 16px rgba(201,149,58,0.12);
   }
 
   .time-main {
-    font-size: clamp(14px, 4vw, 19px);
+    font-size: clamp(15px, 4.2vw, 20px);
     font-weight: 700;
-    color: var(--gold-light);
-    letter-spacing: 0.5px;
-    line-height: 1;
+    color: var(--gold-bright);
+    letter-spacing: 1px; line-height: 1;
     font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 14px rgba(240,192,96,0.32);
+  }
+  .time-lbl {
+    font-size: clamp(6px, 1.7vw, 8px);
+    color: var(--text-soft); letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 1px;
   }
 
-  .time-label {
-    font-size: clamp(7px, 1.9vw, 9px);
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  /* ── JUMU'AH FOOTER ── */
+  /* ── JUMU'AH ── */
   .jummah-footer {
-    border-top: 1px solid rgba(201,149,58,0.3);
-    padding: clamp(10px, 2.5vw, 14px) 14px;
-    background: rgba(0,0,0,0.22);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    position: relative;
+    border-top: 1px solid rgba(201,149,58,0.18);
+    padding: clamp(11px, 3vw, 16px) 16px;
+    background: linear-gradient(90deg, rgba(13,110,53,0.16), rgba(13,110,53,0.07), rgba(13,110,53,0.16));
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    overflow: hidden;
+  }
+  .jummah-footer::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(201,149,58,0.035), transparent);
   }
 
-  .jummah-star { color: var(--gold); font-size: 10px; }
+  .jummah-ornament { color: var(--gold); font-size: 9px; opacity: 0.75; }
 
-  .jummah-text {
-    font-size: clamp(11px, 3.2vw, 14px);
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
+  .jummah-content { text-align: center; }
+  .jummah-label {
+    font-size: clamp(7px, 2vw, 9px);
+    color: var(--text-soft); letter-spacing: 2.5px;
+    text-transform: uppercase; display: block; margin-bottom: 3px;
   }
-
-  .jummah-time {
+  .jummah-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 3.5vw, 16px);
+    color: var(--text-primary); font-weight: 500; letter-spacing: 0.5px;
+  }
+  .jummah-time-badge {
     display: inline-block;
-    background: var(--gold);
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
     color: var(--emerald-deep);
-    font-weight: 700;
-    border-radius: 5px;
-    padding: 1px 8px;
-    font-size: clamp(11px, 3vw, 14px);
-    margin-left: 4px;
-    letter-spacing: 0.5px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700; border-radius: 5px;
+    padding: 1px 10px;
+    font-size: clamp(12px, 3.2vw, 15px);
+    margin-left: 7px; letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(201,149,58,0.3);
   }
 
-  /* ── BOTTOM INFO ── */
-  .bottom-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 12px;
+  /* ── CARD FOOTER ── */
+  .card-footer {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px 20px; gap: 10px;
+    border-top: 1px solid rgba(201,149,58,0.09);
+    background: rgba(4,16,8,0.55);
   }
-
-  .dot {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse-dot 2s ease-in-out infinite;
+  .footer-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,149,58,0.22));
   }
-  .dot:nth-child(2) { animation-delay: 0.4s; }
-  .dot:nth-child(3) { animation-delay: 0.8s; }
-
-  .bottom-note {
-    font-size: clamp(8px, 2.2vw, 10px);
-    color: var(--ink-soft);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 600;
+  .footer-line.r {
+    background: linear-gradient(90deg, rgba(201,149,58,0.22), transparent);
+  }
+  .footer-crescent {
+    font-size: 16px; opacity: 0.6;
+    animation: crescentGlow 3.5s ease-in-out infinite;
   }
 
   @media (max-width: 340px) {
-    .prayer-ar { display: none; }
-    .time-label { display: none; }
+    .prayer-ar, .time-lbl, .arabic-year { display: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="frame">
-<div class="card">
+<div class="wrapper">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-inner">
-      <!-- Dome Icon -->
-      <div class="dome-wrap">
-        <svg class="dome-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- minarets -->
-          <rect x="4" y="26" width="7" height="28" rx="2" fill="rgba(201,149,58,0.85)"/>
-          <ellipse cx="7.5" cy="25" rx="4" ry="5" fill="rgba(201,149,58,0.85)"/>
-          <rect x="53" y="26" width="7" height="28" rx="2" fill="rgba(201,149,58,0.85)"/>
-          <ellipse cx="56.5" cy="25" rx="4" ry="5" fill="rgba(201,149,58,0.85)"/>
-          <!-- crescent tips -->
-          <circle cx="7.5" cy="19" r="2" fill="#e8b85a"/>
-          <circle cx="56.5" cy="19" r="2" fill="#e8b85a"/>
-          <!-- main dome -->
-          <path d="M16 36 C16 22 48 22 48 36" fill="#fff" fill-opacity="0.95"/>
-          <rect x="12" y="36" width="40" height="22" rx="2" fill="#fff" fill-opacity="0.92"/>
-          <!-- door -->
-          <path d="M29 58 L29 47 Q32 43 35 47 L35 58 Z" fill="rgba(13,110,53,0.4)"/>
-          <!-- windows -->
-          <rect x="17" y="42" width="7" height="7" rx="2" fill="rgba(13,110,53,0.3)"/>
-          <rect x="40" y="42" width="7" height="7" rx="2" fill="rgba(13,110,53,0.3)"/>
-          <!-- crescent on dome -->
-          <circle cx="32" cy="20" r="2.5" fill="#e8b85a"/>
-          <line x1="32" y1="16" x2="32" y2="14" stroke="#e8b85a" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
+  <!-- ghost crescent -->
+  <svg class="crescent-bg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="45" fill="#c9953a"/>
+    <circle cx="68" cy="38" r="36" fill="#060e07"/>
+  </svg>
 
-      <div class="header-text">
-        <div class="arabic-title">المركز الإسلامي بجوينفيلي</div>
-        <div class="divider-ornament">
-          <div class="line"></div>
-          <div class="diamond"></div>
-          <div class="diamond"></div>
-          <div class="diamond"></div>
-          <div class="line rev"></div>
-        </div>
-        <div class="portuguese-name">Centro Islâmico de Joinville</div>
-        <div class="subtitle-tag">Horário das Orações</div>
-      </div>
-    </div>
-  </div>
+  <div class="frame">
+  <div class="card">
 
-  <!-- ADDRESS -->
-  <div class="address-strip">
-    <span class="pin">📍</span>
-    <span>Av. Coronel Procópio Gomes, 140 — Joinville, SC</span>
-  </div>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-inner">
 
-  <!-- BODY -->
-  <div class="body">
-
-    <!-- Meta row -->
-    <div class="meta-row">
-      <div class="month-pill">
-        <span class="cal-icon">📅</span>
-        Abril 2026
-      </div>
-      <div class="arabic-month">شوال ١٤٤٧</div>
-    </div>
-
-    <!-- Table -->
-    <div class="table-section">
-      <div class="table-head">
-        <span>Salah</span>
-        <span>Azan</span>
-        <span>Iqama</span>
-      </div>
-
-      <div class="prayers-list">
-        <div class="prayer-row">
-          <div class="prayer-name-cell">
-            <span class="prayer-en">Fajr</span>
-            <span class="prayer-ar">الفجر</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">06:00</span>
-            <span class="time-label">Azan</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">06:05</span>
-            <span class="time-label">Iqama</span>
+        <div class="dome-medallion">
+          <div class="dome-ring-outer"></div>
+          <div class="dome-ring-inner"></div>
+          <div class="dome-icon-wrap">
+            <svg class="dome-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="26" width="6.5" height="30" rx="2" fill="rgba(201,149,58,0.82)"/>
+              <ellipse cx="6.25" cy="24.5" rx="3.8" ry="5" fill="rgba(201,149,58,0.82)"/>
+              <circle cx="6.25" cy="18.5" r="2" fill="#f0c060"/>
+              <rect x="54.5" y="26" width="6.5" height="30" rx="2" fill="rgba(201,149,58,0.82)"/>
+              <ellipse cx="57.75" cy="24.5" rx="3.8" ry="5" fill="rgba(201,149,58,0.82)"/>
+              <circle cx="57.75" cy="18.5" r="2" fill="#f0c060"/>
+              <path d="M15 36 C15 18 49 18 49 36 Z" fill="rgba(240,232,204,0.95)"/>
+              <rect x="11" y="36" width="42" height="22" rx="2.5" fill="rgba(240,232,204,0.92)"/>
+              <path d="M29 58 L29 46 Q32 41 35 46 L35 58 Z" fill="rgba(13,110,53,0.38)"/>
+              <rect x="16" y="40" width="8" height="8" rx="2" fill="rgba(13,110,53,0.28)"/>
+              <rect x="40" y="40" width="8" height="8" rx="2" fill="rgba(13,110,53,0.28)"/>
+              <circle cx="32" cy="17" r="3" fill="#f0c060"/>
+              <line x1="32" y1="13" x2="32" y2="10.5" stroke="#f0c060" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
 
-        <div class="prayer-row">
-          <div class="prayer-name-cell">
-            <span class="prayer-en">Zuhr</span>
-            <span class="prayer-ar">الظهر</span>
+        <div class="header-text">
+          <div class="arabic-title">المركز الإسلامي بجوينفيلي</div>
+          <div class="ornament-row">
+            <div class="orn-line"></div>
+            <span class="orn-star">✦</span>
+            <span class="orn-star">◆</span>
+            <span class="orn-star">✦</span>
+            <div class="orn-line r"></div>
           </div>
-          <div class="time-cell">
-            <span class="time-main">13:00</span>
-            <span class="time-label">Azan</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">13:05</span>
-            <span class="time-label">Iqama</span>
-          </div>
+          <div class="portuguese-name">Centro Islâmico de Joinville</div>
+          <span class="subtitle-tag">Horário das Orações</span>
         </div>
-
-        <div class="prayer-row">
-          <div class="prayer-name-cell">
-            <span class="prayer-en">Asr</span>
-            <span class="prayer-ar">العصر</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">16:00</span>
-            <span class="time-label">Azan</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">16:05</span>
-            <span class="time-label">Iqama</span>
-          </div>
-        </div>
-
-        <div class="prayer-row">
-          <div class="prayer-name-cell">
-            <span class="prayer-en">Maghrib</span>
-            <span class="prayer-ar">المغرب</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">18:15</span>
-            <span class="time-label">Azan</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">18:15</span>
-            <span class="time-label">Iqama</span>
-          </div>
-        </div>
-
-        <div class="prayer-row">
-          <div class="prayer-name-cell">
-            <span class="prayer-en">Ishaa</span>
-            <span class="prayer-ar">العشاء</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">19:30</span>
-            <span class="time-label">Azan</span>
-          </div>
-          <div class="time-cell">
-            <span class="time-main">19:35</span>
-            <span class="time-label">Iqama</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Jumu'ah -->
-      <div class="jummah-footer">
-        <span class="jummah-star">✦</span>
-        <div class="jummah-text">
-          Sexta-feira (Jumu'ah) <span class="jummah-time">13h00</span>
-        </div>
-        <span class="jummah-star">✦</span>
       </div>
     </div>
 
+    <div class="gold-rule"></div>
 
+    <div class="address-strip">
+      <div class="addr-dot"></div>
+      <span>Av. Coronel Procópio Gomes, 140 — Joinville, SC</span>
+      <div class="addr-dot"></div>
+    </div>
 
-  </div><!-- /body -->
-</div><!-- /card -->
-</div><!-- /frame -->
+    <div class="gold-rule"></div>
+
+    <!-- BODY -->
+    <div class="body">
+
+      <div class="meta-row">
+        <div class="month-badge">
+          <div>
+            <span class="month-label">Mês</span>
+            <span class="month-name">Abril 2026</span>
+          </div>
+        </div>
+        <div class="arabic-month-wrap">
+          <span class="arabic-month">شوال ١٤٤٧</span>
+          <span class="arabic-year">Hijri</span>
+        </div>
+      </div>
+
+      <div class="table-section">
+        <div class="table-arch"></div>
+        <div class="table-head">
+          <span>Salah</span>
+          <span>Azan</span>
+          <span>Iqama</span>
+        </div>
+
+        <div class="prayers-list">
+
+          <div class="prayer-row">
+            <div class="prayer-name-cell">
+              <span class="prayer-en">Fajr</span>
+              <span class="prayer-ar">الفجر</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">06:00</span>
+              <span class="time-lbl">Azan</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">06:05</span>
+              <span class="time-lbl">Iqama</span>
+            </div>
+          </div>
+
+          <div class="prayer-row">
+            <div class="prayer-name-cell">
+              <span class="prayer-en">Zuhr</span>
+              <span class="prayer-ar">الظهر</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">13:00</span>
+              <span class="time-lbl">Azan</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">13:05</span>
+              <span class="time-lbl">Iqama</span>
+            </div>
+          </div>
+
+          <div class="prayer-row">
+            <div class="prayer-name-cell">
+              <span class="prayer-en">Asr</span>
+              <span class="prayer-ar">العصر</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">16:00</span>
+              <span class="time-lbl">Azan</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">16:05</span>
+              <span class="time-lbl">Iqama</span>
+            </div>
+          </div>
+
+          <div class="prayer-row">
+            <div class="prayer-name-cell">
+              <span class="prayer-en">Maghrib</span>
+              <span class="prayer-ar">المغرب</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">18:15</span>
+              <span class="time-lbl">Azan</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">18:15</span>
+              <span class="time-lbl">Iqama</span>
+            </div>
+          </div>
+
+          <div class="prayer-row">
+            <div class="prayer-name-cell">
+              <span class="prayer-en">Ishaa</span>
+              <span class="prayer-ar">العشاء</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">19:30</span>
+              <span class="time-lbl">Azan</span>
+            </div>
+            <div class="time-cell">
+              <span class="time-main">19:35</span>
+              <span class="time-lbl">Iqama</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="jummah-footer">
+          <span class="jummah-ornament">✦</span>
+          <div class="jummah-content">
+            <span class="jummah-label">Oração de Sexta-feira</span>
+            <div class="jummah-main">
+              Jumu'ah <span class="jummah-time-badge">13h00</span>
+            </div>
+          </div>
+          <span class="jummah-ornament">✦</span>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="card-footer">
+      <div class="footer-line"></div>
+      <span class="footer-crescent">☽</span>
+      <div class="footer-line r"></div>
+    </div>
+
+  </div><!-- /card -->
+  </div><!-- /frame -->
+</div><!-- /wrapper -->
 
 </body>
 </html>

@@ -4,9 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Centro Islâmico de Joinville - Horário das Orações</title>
+<meta name="color-scheme" content="only dark">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── LOCK COLORS — prevent browser night mode / forced-colors from overriding design ── */
+  :root {
+    color-scheme: only dark;
+    forced-color-adjust: none;
+  }
+  html { forced-color-adjust: none; }
+  * { forced-color-adjust: none; }
 
   :root {
     --bg-page:      #060e07;
